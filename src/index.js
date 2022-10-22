@@ -43,7 +43,7 @@ function renderCountriesList(countries) {
                     <img src='${c.flags['svg']}' alt='${c.name}' width='500'>
                     <p><b>Capital</b>: ${c.capital}</p>
                     <p><b>Population</b>: ${c.population}</p>
-                    <p><b>Languages</b>: ${Object.values(c.languages)}</p>`;
+                    <p><b>Languages</b>: ${Object.values(c.languages).join(' ,')}</p>`;
       });
       break;
     case (x < 10):
