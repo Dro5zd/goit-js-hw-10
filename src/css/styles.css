@@ -55,10 +55,16 @@ h2 {
   display: flex;
   align-items: center;
   padding-left: 20px;
-  margin-bottom: 20px;
+  height: 50px;
+  cursor: pointer;
+  width: 500px;
+  background-color: #b1bbbb;
+}
+
+.country-li:nth-child(odd){
+  background-color: #d1d5d5;
 }
 
 .country-li p {
   padding-left: 20px;
-  cursor: pointer;
 }

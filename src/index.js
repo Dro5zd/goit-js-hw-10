@@ -25,7 +25,7 @@ input.addEventListener('input', _.debounce(e => {
         renderCountriesList(countries);
         countryInfoOnclickHandler(countries);
       })
-      .catch(error => {
+      .catch(() => {
         nullFunc();
         return Notiflix.Notify.failure('Oops, there is no country with that name');
       });
@@ -45,22 +45,23 @@ function renderCountriesList(countries) {
                     <img src='${c.flags['svg']}' alt='${c.name}' width='500'>
                     <p><b>Capital</b>: ${c.capital}</p>
                     <p><b>Population</b>: ${c.population}</p>
-                    <p><b>Languages</b>: ${Object.values(c.languages)}</p>`;
-    });
+                    <p><b>Languages</b>: ${Object.values(c.languages )}</p>`;
+    })
   } else if (countries.length < 10) {
     countryInfo.innerHTML = '';
     countryList.innerHTML = countries.map(c => {
-      return `<li class='country-li'>
-                       <img src='${c.flags['svg']}' alt='${c.name['official']}' width='50'>
-                       <p >${c.name['official']}</p>
-                    </li>`;
+      return `<li class='country-li' data-country-name='${c.name['official']}'>
+                 <img src='${c.flags['svg']}' alt='${c.name['official']}' width='50'>
+                 <p >${c.name['official']}</p>
+               </li>`;
     }).join('');
   }
 }
 
 function countryInfoOnclickHandler(countries) {
   document.querySelector('.country-list').addEventListener('click', (e) => {
-    let filteredCountry = countries.filter(c => e.target.innerHTML === c.name['official'])[0];
+    let filterValue = e.target.dataset.countryName || e.target.innerHTML || e.target.alt
+    let filteredCountry = countries.filter(c => filterValue === c.name['official'])[0];
     const { name, flags, capital, population, languages } = filteredCountry;
     countryList.innerHTML = '';
     return countryInfo.innerHTML = `<h2>${name['official']}</h2>
